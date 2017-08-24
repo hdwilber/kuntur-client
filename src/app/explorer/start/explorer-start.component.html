@@ -1,0 +1,28 @@
+
+<div class="row">
+  <h1>Explore the biodiversity</h1>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="form">
+      <div class="form-wrapper"> 
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input class="form-control" id="email" type="email" [(ngModel)]="explorer.email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input class="form-control" id="password" type="password" [(ngModel)]="explorer.password">
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <button class="btn btn-block btn-primary" (click)="login()" type="button">Login</button>
+          </div>
+          <div class="col-sm-6">
+            <button class="btn btn-block btn-secondary" (click)="register()" type="button">Register</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

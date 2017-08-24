@@ -1,0 +1,24 @@
+.row
+  h1
+    | Explore the biodiversity
+.row
+  .col-sm-12
+    .form
+      .form-wrapper 
+        .form-group
+          label(for="email")
+            | Email:
+          input#email.form-control(type="email", [(ngModel)]="explorer.email")
+        .form-group
+          label(for="password")
+            | Password:
+          input#password.form-control(type="password", [(ngModel)]="explorer.password")
+
+        .form-group.row
+          .col-sm-6
+            button.btn.btn-block.btn-primary((click)="login()" type='button')
+              | Login
+          .col-sm-6
+            button.btn.btn-block.btn-secondary((click)="register()" type='button')
+              | Register
+

@@ -1,0 +1,41 @@
+@nav-border: #efefef;
+@nav-border-hov: #666;
+@nav-item: #9db44f;
+.navbar-default {
+  border-bottom: solid 2px @nav-border;
+  min-height: 52px;
+  height: 52px;
+  border-top: solid 2px @nav-border;
+  .navbar-nav {
+    > li {
+      a {
+        border-left: solid 2px transparent;
+        border-right: solid 2px @nav-border;
+        border-top: solid 2px @nav-border;
+        border-bottom: solid 2px @nav-border;
+        padding-left: 4em;
+        padding-right: 4em;
+        margin-left: -2px;
+        margin-top: -2px;
+        margin-bottom: -2px;
+        height: 52px;
+
+        &:first-child {
+          border-left: solid 2px @nav-border;
+        }
+        &:hover {
+          border: solid 2px @nav-border-hov;
+          z-index:100;
+          background-color: @nav-item;
+          color: white;
+        }
+      }
+    }
+  }
+  .navbar-brand { 
+    padding: 3px;
+    > img {
+      height: 45px;
+    }
+  }
+}

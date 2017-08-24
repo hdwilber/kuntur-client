@@ -1,0 +1,105 @@
+.records-list-wrapper(*ngIf="records")
+  h2
+    | Showing {{records.length}} records.
+  ul.record-list.list-inline.row
+    li.col-md-6(*ngFor="let record of records")
+      .record
+        .title((click)="edit(record)")
+          | {{record.name}}
+        p
+          | {{record.location}}
+        .date
+          | {{record.created | date}}
+        .media-gallery-wrapper
+          .media-gallery
+            .item(*ngFor="let i of record.media")
+              img.img-responsive([src]="restService.fillUrl(i.url)", [alt]="i.name + i.format")
+        p(*ngFor="let ro of record.organisms")
+          span(*ngFor="let rtax of ro.taxonomy")
+            | {{rtax.taxon.rank}} : {{rtax.taxon.name}}
+            
+            
+        p
+          span(*ngIf="record.explorer.username")
+            | Author: {{record.explorer.username}}
+          span(*ngIf="!record.explorer.username")
+            | Author: {{record.explorer.email}}
+//-.container(*ngIf="records")
+  .wrapper
+    .records-list-wrapper
+      .record-list
+        .record(*ngFor="let record of records")
+          .title
+            | {{record.name}}
+          .date
+            | {{record.created | date}}
+          .image-gallery-wrapper
+            .image-gallery-item(*ngFor="let i of record.media")
+              img([src]="restService.fillUrl(i.url)", [alt]="i.name + i.format")
+
+  
+
+//-.container(*ngIf="records != null")
+  //-.wrapper(fxLayout="column", fxLayoutAlign="center top", fxFlex="70", fxFlexOffset="15")
+    //-| Latest Records
+    //-.form-wrapper(fxLayout="column")
+      //-p
+        //-| This part will show you the latest records that were published in Kuntur. Enjoy it!
+    //-.records-list-wrapper
+      //-.records-list(*ngFor="let record of records")
+        //-span(fxLayoutAlign="start center", fxFlex="50")
+          //-| {{record.explorer.nickName}}
+          //-| | 
+          //-| {{record.name}}
+          
+        //-span(fxLayoutAlign="end center", fxFlex="50")
+          //-| Uploaded: 
+          //-| {{record.created}}
+          
+        //-.image-gallery-wrapper(fxFlex="100", fxLayoutAlign="center center")
+          //-.image-gallery(*ngIf="record.media != null", fxLayoutAlign="center center", fxflex="100", fxLayoutGap="25px", fxLayout.xs="column")
+            //-.image-gallery-item(*ngFor="let i of record.media", fxLayoutAlign="center center", fxFlex="33" )
+              //-img( [src]="restService.fillUrl(i.url)",[alt]="i.name + i.format")
+                  
+          //-.form-group(fxLayout="column", fxLayoutGap="10px")
+            //-label(fxLayoutAlign="start center", fxFlex="100")
+              //-| Places
+            //-.input-container(fxLayoutAlign="start center",fxFlex="100", fxLayout="row", fxLayoutGap="25px")
+              //-.locations-list(fxFlex="50", *ngIf="record.media != null")
+                //-ul
+                  //-li(*ngFor="let a of record.media", [class.selected]='a == selectedMedia', (click)='selectMedia(a)')
+                    //-.legend-item
+                      //-span
+                        //-| Latitude:
+                      //-span(*ngIf="a.location != null")
+                        //-| {{a.location.lat}}
+                      //-span(*ngIf="a.location == null")
+                        //-| Not Set
+
+                      //-| &nbsp; - &nbsp;
+                      //-span
+                        //-| Longitude:
+                      //-span(*ngIf="a.location != null")
+                        //-| {{a.location.lng}}
+                      //-span(*ngIf="a.location == null")
+                        //-| Not Set
+                    //-button(md-button, (click)="setCurrentLocation(a)")
+                      //-img(src='assets/icons/leaflet-target.png')
+
+              //-map-viewer(fxLayoutAlign="end center",[mapId]="singleMapId", fxFlex='100', [media]="record.media", [selected]="selectedMedia", (centerMap)="changeMapCenter($event)")
+          //-.form-group(fxLayout="column", fxLayoutGap="10px")
+            //-label(fxLayoutAlign="start center", fxFlex)
+              //-| Description
+            //-.input-container(fxLayoutAlign="start center",fxFlex="100")
+              //-textarea
+
+          //-.form-group(fxLayout="row", fxLayoutGap="25px") 
+            //-label
+              //-md-checkbox(type="radio", [(ngModel)]="record.published")
+              //-| Publish in Kuntur
+          //-.form-group(fxLayout="row", fxLayoutGap="25px")
+            //-button(fxFlex="50",md-button, (click)="saveRecord()" type='button')
+              //-| Save
+            //-button(fxFlex="50",md-button, (click)="discardRecord()" type='button')
+              //-| Discard
+

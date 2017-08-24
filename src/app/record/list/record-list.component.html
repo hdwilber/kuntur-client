@@ -1,0 +1,20 @@
+
+<div class="records-list-wrapper" *ngIf="records">
+  <h2>Showing {{records.length}} records.</h2>
+  <ul class="record-list list-inline row">
+    <li class="col-md-6" *ngFor="let record of records">
+      <div class="record">
+        <div class="title" (click)="edit(record)">{{record.name}}</div>
+        <p>{{record.location}}</p>
+        <div class="date">{{record.created | date}}</div>
+        <div class="media-gallery-wrapper">
+          <div class="media-gallery">
+            <div class="item" *ngFor="let i of record.media"><img class="img-responsive" [src]="restService.fillUrl(i.url)" [alt]="i.name + i.format"></div>
+          </div>
+        </div>
+        <p *ngFor="let ro of record.organisms"><span *ngFor="let rtax of ro.taxonomy">{{rtax.taxon.rank}} : {{rtax.taxon.name}}</span></p>
+        <p><span *ngIf="record.explorer.username">Author: {{record.explorer.username}}</span><span *ngIf="!record.explorer.username">Author: {{record.explorer.email}}</span></p>
+      </div>
+    </li>
+  </ul>
+</div>

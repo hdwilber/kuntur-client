@@ -1,0 +1,21 @@
+nav.navbar.navbar-default
+  .container
+    .navbar-header
+      a.navbar-brand(routerLink="home")
+        img(src='assets/images/logo.png')
+    ul.nav.navbar-nav.pull-right
+      li(routerLinkActive="active", routerLink="records")
+        a
+          | Records
+      li(routerLinkActive="active", routerLink="explorers")
+        a
+          | Explorers
+      li(routerLinkActive="active", routerLink="places")
+        a
+          | Places
+      li(*ngIf="session == null", (click)="goToStart()")
+        a
+          | Login
+      li(*ngIf="session != null", (click)="logoutFnc()")
+        a
+          | Logout

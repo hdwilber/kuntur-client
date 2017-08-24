@@ -1,0 +1,13 @@
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header"><a class="navbar-brand" routerLink="home"><img src="assets/images/logo.png"></a></div>
+    <ul class="nav navbar-nav pull-right">
+      <li routerLinkActive="active" routerLink="records"><a>Records</a></li>
+      <li routerLinkActive="active" routerLink="explorers"><a>Explorers</a></li>
+      <li routerLinkActive="active" routerLink="places"><a>Places</a></li>
+      <li *ngIf="session == null" (click)="goToStart()"><a>Login</a></li>
+      <li *ngIf="session != null" (click)="logoutFnc()"><a>Logout</a></li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,10 @@
+.map-viewer([id]="mapId")
+  .maps-viewer-inputs(*ngIf='center != null')
+    label
+      | Latitude:
+      span
+        | {{centerStr.lat}}
+    label
+      | Longitude: 
+      span
+        | {{centerStr.lng}}

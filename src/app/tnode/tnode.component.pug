@@ -1,0 +1,17 @@
+.tnode(*ngIf="tnode != null")
+  .tnode-content(*ngIf="tnode.type != 'root'")
+    //-input(type="checkbox",[checked]="enode.expanded",(click)="toggleExpand(enode)", [id]='enode.id')
+
+    span.ind(*ngIf="tnode.expanded", (click)="toggleExpand(tnode)")
+      | +
+    span.ind(*ngIf="tnode.expanded == false", (click)="toggleExpand(tnode)")
+      | -
+    label((click)="select(tnode)", [class.selected]="current === tnode")
+      span(*ngIf="tnode.data !==  undefined")
+        | {{tnode.data.rank}}
+
+  .tnode-children(style="margin-left: 15px", *ngIf="tnode.expanded")
+    .children(*ngFor="let c of tnode.children")
+      tnode([node]="c", [current]="current", (selected)="functionde($event)")
+
+

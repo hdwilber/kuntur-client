@@ -1,0 +1,11 @@
+
+<div class="tnode" *ngIf="tnode != null">
+  <div class="tnode-content" *ngIf="tnode.type != 'root'"><span class="ind" *ngIf="tnode.expanded" (click)="toggleExpand(tnode)">+</span><span class="ind" *ngIf="tnode.expanded == false" (click)="toggleExpand(tnode)">-</span>
+    <label (click)="select(tnode)" [class.selected]="current === tnode"><span *ngIf="tnode.data !==  undefined">{{tnode.data.rank}}</span></label>
+  </div>
+  <div class="tnode-children" style="margin-left: 15px;" *ngIf="tnode.expanded">
+    <div class="children" *ngFor="let c of tnode.children">
+      <tnode [node]="c" [current]="current" (selected)="functionde($event)"></tnode>
+    </div>
+  </div>
+</div>

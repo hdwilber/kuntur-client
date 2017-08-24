@@ -1,0 +1,59 @@
+
+<h1>Create a new Record</h1>
+<div class="row" *ngIf="record">
+  <div class="col-sm-12">
+    <p>To create a new record, please Add Media Files(pictures, video, sounds). The place will be extracted from your media, if they have, automatically. You can add locations by hand, too.</p>
+    <div class="form">
+      <div class="form-group">
+        <label for="name">Name for Record: </label>
+        <input class="form-control" id="name" type="text" [(ngModel)]="record.name">
+      </div>
+      <div class="form-group">
+        <label for="media">Add Media:
+          <button id="media" (click)="fileInput.click()"><img width="25px" src="/assets/icons/cloud-upload.svg"></button>
+          <input id="addmedia" #fileInput type="file" multiple (change)="uploadFiles($event)">
+        </label>
+      </div>
+      <div class="image-gallery-wrapper">
+        <ul class="inline-list image-gallery" *ngIf="record.media != null">
+          <div class="image-gallery-item" *ngFor="let i of record.media" (click)="selectMedia(i)" [class.selected]="i == selectedMedia"><img class="img-responsive" [src]="fillUrl(i.url)" [alt]="i.name + i.format"></div>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label>Places</label>
+          <div class="locations-list" *ngIf="record.media != null">
+            <ul>
+              <li *ngFor="let a of record.media" [class.selected]="a == selectedMedia" (click)="selectMedia(a)">
+                <div class="legend-item"><span>Latitude:</span><span *ngIf="a.location != null">{{a.location.lat}}</span><span *ngIf="a.location == null">Not Set</span>&nbsp; - &nbsp;<span>Longitude:</span><span *ngIf="a.location != null">{{a.location.lng}}</span><span *ngIf="a.location == null">Not Set</span></div>
+                <button class="btn" (click)="setCurrentLocation(a)"><img src="assets/icons/leaflet-target.png"></button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <map-viewer [mapId]="singleMapId" [media]="record.media" [selected]="selectedMedia" (centerMap)="changeMapCenter($event)"></map-viewer>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" [(ngModel)]="record.description"></textarea>
+      </div>
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" [(ngModel)]="record.published">Publish in Kuntur
+          </label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-4 col-sm-offset-1">
+          <button class="btn btn-block btn-primary" (click)="saveRecord()" type="button">Save</button>
+        </div>
+        <div class="col-sm-4 col-sm-offset-2">
+          <button class="btn btn-block btn-secondary" (click)="discardRecord()" type="button">Discard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
